@@ -16,10 +16,12 @@
     
     var movies = [];
     var whichVideo=0;
+    var josefin;
 
     function preload() {
         movies[0] = createVideo('assets/Yin.mp4');
         movies[1] = createVideo('assets/Yang.mp4');
+        josefin = loadFont('assets/JosefinSans-Regular.ttf');
     }
 
     function setup() {
@@ -39,6 +41,7 @@
         cy2 = cy - sm_rad;
         movies[0].hide();
         movies[1].hide();
+        textFont(josefin);
     }
 
 
@@ -56,6 +59,8 @@
         var y1 = sm_diam - sm_diam * (1 - t);
         var r1 = diam * (1 - t);
 
+        
+        
 
         stroke(96, 94, 67);
         strokeWeight(10);
@@ -113,6 +118,17 @@
             yinAnim = false;
             yangAnim = false;
             theta = 0;
+        }
+        rotate(-theta);
+        if(yinAnim) {
+            textSize(60);
+            fill(96, 94, 67);
+            text('Yin', -50, 0);
+        }
+        else if(yangAnim) {
+            textSize(60);
+            fill(96, 94, 67);
+            text('Yang', -50, 0);
         }
     }
 
