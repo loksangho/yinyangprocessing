@@ -43,8 +43,6 @@
 
     function draw() {
 
-
-        image(videos[whichVideo],0,0,width,height);
         
         translate(width / 2, height / 2);
 
