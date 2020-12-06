@@ -13,6 +13,8 @@
     var yangAnim = false;
     var playYinMovie = false;
     var playYangMovie = false;
+    var hoverYin = false;
+    var hoverYang = false;
     
     var movies = [];
     var whichVideo=0;
@@ -59,7 +61,8 @@
         var y1 = sm_diam - sm_diam * (1 - t);
         var r1 = diam * (1 - t);
 
-        
+        var yinHoverColour = 60;
+        var yangHoverColour = 200;
         
 
         stroke(96, 94, 67);
@@ -67,12 +70,24 @@
         ellipse(0, 0, diam, diam);
 
 
-        //background circle  
-        fill(238);
+        //background circle 
+        
+        
+        if((InsideYang(cx, cy, diam, sm_diam)&&!(yangAnim||yinAnim)) || yangAnim) {
+            fill(96, 94, 67);
+        }
+        else {
+            fill(238);
+        }
         noStroke();
         ellipse(0, 0, diam, diam);
         // black part  
-        fill(34);
+        if((InsideYin(cx, cy, diam, sm_diam)&&!(yangAnim||yinAnim)) || yinAnim) {
+            fill(96, 94, 67);
+        }
+        else {
+            fill(34);
+        }
         arc(0, 0, diam, diam, PI / 2, TWO_PI - PI / 2);
         if (yangAnim) {
             arc(0, -y1, r1, r1, -PI / 2, PI / 2);
@@ -87,7 +102,12 @@
             translate(0, diam - r1);
         }
         rotate(PI);
-        fill(238);
+        if((InsideYang(cx, cy, diam, sm_diam)&&!(yangAnim||yinAnim)) || yangAnim) {
+            fill(96, 94, 67);
+        }
+        else {
+            fill(238);
+        }
         if (yangAnim) {
             arc(0, -y0, r0, r0, -PI / 2, PI / 2);
         } else {
@@ -120,15 +140,15 @@
             theta = 0;
         }
         rotate(-theta);
-        if(yinAnim) {
+        if(InsideYin(cx, cy, diam, sm_diam)&&!(yangAnim||yinAnim)) {
             textSize(60);
             fill(96, 94, 67);
-            text('Yin', -50, 0);
+            text('Yin', 100, 0);
         }
-        else if(yangAnim) {
+        else if(InsideYang(cx, cy, diam, sm_diam)&&!(yangAnim||yinAnim)) {
             textSize(60);
             fill(96, 94, 67);
-            text('Yang', -50, 0);
+            text('Yang', -200, 0);
         }
     }
 
@@ -192,3 +212,4 @@
             movies[1].hide();
         }
     }
+
