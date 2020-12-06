@@ -178,7 +178,6 @@
 
     function InsideYin(cx, cy, big_diam, small_diam) {
         if (dist(mouseX, mouseY, cx,(cy - small_diam / 2)) < small_diam / 2) {
-            console.log(mouseX);
             return true;
         } else if (dist(mouseX, mouseY, cx,cy) < big_diam / 2 && mouseX - cx < 0 && !(dist(mouseX, mouseY,cx,(cy + small_diam / 2)) < small_diam / 2)) {
             return true;
