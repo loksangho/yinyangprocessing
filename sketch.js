@@ -14,11 +14,12 @@
     var playYinMovie = false;
     var playYangMovie = false;
     
-    var movies;
+    var movies = [];
     var whichVideo=0;
 
     function preload() {
-        movies = createVideo(['assets/Yin.mp4','assets/Yang.mp4']);
+        movies[0] = createVideo('assets/Yin.mp4');
+        movies[1] = createVideo('assets/Yang.mp4');
     }
 
     function setup() {
@@ -36,7 +37,8 @@
         cy1 = cy + sm_rad;
         cx2 = cx;
         cy2 = cy - sm_rad;
-        
+        movies[0].hide();
+        movies[1].hide();
     }
 
 
@@ -105,15 +107,20 @@
         if (theta < TWO_PI && (yinAnim || yangAnim)) {
             theta += TWO_PI / frms;
         } else {
+            if(yinAnim || yangAnim) {
+                playTheVideo();
+            }
             yinAnim = false;
             yangAnim = false;
             theta = 0;
-            playTheVideo();
         }
     }
 
-    function playTheVideo() {      
-          movies[whichVideo].play();
+    function playTheVideo() {   
+            movies[whichVideo].pause();
+        movies[whichVideo].time(0);
+            movies[whichVideo].show();
+        movies[whichVideo].showControls();
           movies[whichVideo].onended(videoOver); //when video ends, call videoOver to return to first screen
     }
 
@@ -155,9 +162,13 @@
             yinAnim = true;
             playYinMovie = true;
             whichVideo = 0;
+            movies[0].hide();
+            movies[1].hide();
         } else if (InsideYang(cx, cy, diam, sm_diam)) {
             yangAnim = true;
             playYangMovie = true;
             whichVideo = 1;
+            movies[0].hide();
+            movies[1].hide();
         }
     }
