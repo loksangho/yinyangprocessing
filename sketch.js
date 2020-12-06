@@ -24,7 +24,7 @@
 
     function setup() {
 
-        createCanvas(1024, 1024);
+        createCanvas(512, 512);
         smooth();
         background(0);
 
@@ -117,11 +117,11 @@
     }
 
     function playTheVideo() {   
-            movies[whichVideo].pause();
+        movies[whichVideo].pause();
         movies[whichVideo].time(0);
-            movies[whichVideo].show();
+        movies[whichVideo].show();
         movies[whichVideo].showControls();
-          movies[whichVideo].onended(videoOver); //when video ends, call videoOver to return to first screen
+        movies[whichVideo].onended(videoOver); //when video ends, call videoOver to return to first screen
     }
 
     function videoOver() {
@@ -162,12 +162,16 @@
             yinAnim = true;
             playYinMovie = true;
             whichVideo = 0;
+            movies[0].pause();
+            movies[1].pause();
             movies[0].hide();
             movies[1].hide();
         } else if (InsideYang(cx, cy, diam, sm_diam)) {
             yangAnim = true;
             playYangMovie = true;
             whichVideo = 1;
+            movies[0].pause();
+            movies[1].pause();
             movies[0].hide();
             movies[1].hide();
         }
